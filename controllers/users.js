@@ -11,7 +11,16 @@ async function getById(req, res, next) {
 
 async function getUser(req, res) {
 
-    res.send(req.user);
+    console.log(req.user);
+
+    res.render('users', {
+        locals: {
+            username: req.user.username,
+            email: req.user.email,
+            id: req.user.id
+        }
+
+    })
 }
 
 async function createUser(req, res) {

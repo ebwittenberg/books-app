@@ -3,7 +3,11 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.send('Welcome to the reading app');
+  res.render('index', {
+    locals: {
+        title: `Welcome to the reading app`
+    }
+  })
 });
 
 module.exports = router;

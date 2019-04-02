@@ -9,11 +9,19 @@ var usersRouter = require('./routes/users');
 const booksRouter = require('./routes/book');
 const ownedRouter = require('./routes/owned');
 
+const es6Renderer = require('express-es6-template-engine');
+
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+// this is where I will replace with ES6 renderer
+
+app.engine('html', es6Renderer);
+
+// app.set('views', path.join(__dirname, 'views'));
+app.set('views', './views');
+// app.set('view engine', 'pug');
+app.set('view engine', 'html');
 
 app.use(logger('dev'));
 app.use(express.json());

@@ -1,9 +1,11 @@
 const Owned = require('../models/owned');
 
 // gets all owned books, regardless of user
-function getAll(req, res) {
+async function getAll(req, res) {
 
-    res.send(`All owned books goes here`);
+    const ownedBooks = await Owned.getAll();
+
+    res.send(ownedBooks);
 }
 
 module.exports = {
