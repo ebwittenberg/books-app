@@ -1,10 +1,17 @@
 const User = require('../models/users');
 
-async function getUser(req, res) {
+async function getById(req, res, next) {
 
     const userID = req.params.userid;
     const aUser = await User.getById(userID);
-    res.send(aUser);
+    req.user = aUser;
+
+    next();
+}
+
+async function getUser(req, res) {
+
+    res.send(req.user);
 }
 
 async function createUser(req, res) {
@@ -16,10 +23,7 @@ async function createUser(req, res) {
 
 async function ownedBooks(req, res) {
 
-    const userID = req.params.userid;
-    const aUser = await User.getById(userID);
-
-    const ownedBooks = await aUser.getOwnedBooks();
+    const ownedBooks = await req.user.getOwnedBooks();
 
     res.send(ownedBooks);
 }
@@ -49,6 +53,7 @@ async function sellBook(req, res) {
 }
 
 module.exports = {
+    getById,
     getUser,
     createUser,
     ownedBooks,

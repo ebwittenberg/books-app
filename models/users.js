@@ -1,6 +1,4 @@
 const db = require('./conn');
-const bcrypt = require('bcrypt');
-const Owned = require('./owned');
 const Book = require('./books');
 
 class User {

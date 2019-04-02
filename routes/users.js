@@ -1,8 +1,9 @@
 var express = require('express');
-var router = express.Router();
+var userRouter = express.Router();
 // const User = require('../models/users');
 
 const {
+  getById,
   getUser,
   createUser,
   ownedBooks,
@@ -11,24 +12,24 @@ const {
 } = require('../controllers/users');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+userRouter.get('/', function(req, res, next) {
   res.send('respond with resource');
 });
 
-router.get('/:userid', getUser);
+userRouter.get('/:userid', getById, getUser);
 
 
-router.get('/:userid/owned', ownedBooks);
+userRouter.get('/:userid/owned', getById, ownedBooks);
 
 
-router.post('/:userid/buy/:bookid', buyBook);
+userRouter.post('/:userid/buy/:bookid', buyBook);
 
 
-router.post('/newuser', createUser);
+userRouter.post('/newuser', createUser);
 
 
-router.delete('/:userid/sell/:bookid', sellBook);
+userRouter.delete('/:userid/sell/:bookid', sellBook);
 
 
 
-module.exports = router;
+module.exports = userRouter;
