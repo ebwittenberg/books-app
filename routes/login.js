@@ -5,6 +5,9 @@ const loginRouter = express.Router();
 
 loginRouter.get('/', (req, res) => { // the req res part is normally in controller, move there later
 
+    // clear any stored session
+
+    req.session.destroy();
     // send them the login form
     res.render('login', {
         locals: {

@@ -52,23 +52,14 @@ app.use('/login', loginRouter);
 
 app.get('/dashboard', (req, res) => {
   console.log(`The user's id is: ${req.session.user}`);
-  res.send('This is the dashboard. You are now logged in');
+
+  // if user entered password correctly
+  if (req.session.user) {
+    res.send('This is the dashboard. You are now logged in');
+  } else {
+    // redirect to login page
+    res.redirect('/login');
+  }
 })
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
-
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
 
 module.exports = app;

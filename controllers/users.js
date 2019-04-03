@@ -11,16 +11,23 @@ async function getById(req, res, next) {
 
 async function getUser(req, res) {
 
-    console.log(req.user);
+    console.log(req.session.user);
 
-    res.render('users', {
-        locals: {
-            username: req.user.username,
-            email: req.user.email,
-            id: req.user.id
-        }
+    if (req.session.user) {
 
-    })
+        res.render('users', {
+            locals: {
+                username: req.user.username,
+                email: req.user.email,
+                id: req.user.id
+            }
+    
+        })
+        
+    } else {
+        res.redirect('/login')
+    }
+    
 }
 
 async function createUser(req, res) {
