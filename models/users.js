@@ -30,6 +30,7 @@ class User {
             const userInstance = new User(userData.id, userData.email, userData.username, userData.password);
             return userInstance;
         })
+        .catch(err => console.log(`This is an error`));
     }
 
     buyBook(bookID) {
