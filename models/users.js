@@ -33,6 +33,25 @@ class User {
         .catch(err => console.log(`This is an error`));
     }
 
+    static getByUsername(username) {
+        return db.one(`
+        select * from users
+        WHERE email=$1
+        
+        `, [username])
+        .then(userData => {
+            return new User(userData.id, userData.email, userData.username, userData.password);
+        })
+    }
+
+    checkPassword(aPassword) {
+        if (aPassword === this.password) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     buyBook(bookID) {
         // needs to create new item in owned table
         return db.one(`

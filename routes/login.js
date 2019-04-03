@@ -13,9 +13,12 @@ loginRouter.post('/', (req, res) => {
 
     console.log(req.body.username);
     console.log(req.body.password);
-    res.send('you posted the form');
+    // let's just assume they typed in the correct password
+    // to do: check password for real
 
-})
+    res.redirect('/dashboard');
+
+});
 
 
 

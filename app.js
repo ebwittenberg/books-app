@@ -37,6 +37,10 @@ app.use('/books', booksRouter);
 app.use('/owned', ownedRouter);
 app.use('/login', loginRouter);
 
+app.get('/dashboard', (req, res) => {
+  res.send('This is the dashboard. You are now logged in');
+})
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
