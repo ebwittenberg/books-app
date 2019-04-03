@@ -42,6 +42,7 @@ class User {
         .then(userData => {
             return new User(userData.id, userData.email, userData.username, userData.password);
         })
+        .catch(err => err);
     }
 
     checkPassword(aPassword) {
