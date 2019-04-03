@@ -26,8 +26,14 @@ loginRouter.post('/', async (req, res) => {
     const theUser = await User.getByUsername(req.body.username);
     
     if (theUser.checkPassword(req.body.password)) {
-        
-        res.redirect('/dashboard');
+        // make note that the password is correct and store it on the session, check for it on the dashboard route
+
+        // save the user's id to the session
+        req.session.user = theUser.id
+        // Make sure the session is saved before we redirect
+        req.session.save(() => {
+            res.redirect('/dashboard');
+        });
 
     } else {
 
