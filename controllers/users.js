@@ -11,8 +11,6 @@ async function getById(req, res, next) {
 
 async function getUser(req, res) {
 
-    console.log(req.session.user);
-
     if (req.session.user) {
 
         res.render('users', {
@@ -23,7 +21,7 @@ async function getUser(req, res) {
             }
     
         })
-        
+
     } else {
         res.redirect('/login')
     }
