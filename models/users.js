@@ -36,7 +36,7 @@ class User {
     static getByUsername(username) {
         return db.one(`
         select * from users
-        WHERE email=$1
+        WHERE username=$1
         
         `, [username])
         .then(userData => {
