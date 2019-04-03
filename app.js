@@ -26,7 +26,7 @@ app.set('view engine', 'html'); // tell express to use as its view engine the th
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false })); // baked into express already, can decode form data and put in req.body
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 

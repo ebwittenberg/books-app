@@ -9,6 +9,14 @@ loginRouter.get('/', (req, res) => { // the req res part is normally in controll
 
 })
 
+loginRouter.post('/', (req, res) => {
+
+    console.log(req.body.username);
+    console.log(req.body.password);
+    res.send('you posted the form');
+
+})
+
 
 
 module.exports = loginRouter;
