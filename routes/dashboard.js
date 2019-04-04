@@ -1,11 +1,12 @@
 const express = require('express');
 const {
+    getById,
     buyBook
 } = require('../controllers/users');
 
 const dashboardRouter = express.Router();
 
-dashboardRouter.post('/buy', buyBook);
+dashboardRouter.post('/buy', getById, buyBook);
 
 dashboardRouter.get('/', (req, res) => {
     if (req.session.user) {

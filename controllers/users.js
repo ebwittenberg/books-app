@@ -2,7 +2,7 @@ const User = require('../models/users');
 
 async function getById(req, res, next) {
 
-    const userID = req.params.userid;
+    const userID = req.session.user;
     const aUser = await User.getById(userID);
     req.user = aUser;
 
@@ -55,9 +55,9 @@ async function buyBook(req, res) {
 
     // need to figure out how to get userID
     // this is in sessions somewhere
-  
-    const aUser = await User.getById(req.session.user);
-    const newOwnedId = await aUser.buyBook(bookID);
+    // here it is
+    // const aUser = await User.getById(req.session.user);
+    const newOwnedId = await req.user.buyBook(bookID);
   
     res.render('dashboard', {
         locals: {
