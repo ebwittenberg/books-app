@@ -1,4 +1,4 @@
-const Book = require('../models/books');
+const User = require('../models/books');
 
 async function retrieveBook(req, res) {
 
@@ -19,8 +19,16 @@ async function retrieveBook(req, res) {
 
 async function addBook(req, res) {
 
-    const newBookID = await Book.createBook(req.body);
-    res.send(`New book ID: ${newBookID}`);
+    // need to fix this. This is supposed to create a new book in database
+
+    console.log(req.body);
+
+    // const newBookID = await Book.createBook(req.body);
+    res.render('dashboard', {
+        locals: {
+            message: 'Bought book'
+        }
+    });
 
 }
 

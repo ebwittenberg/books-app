@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>User dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <h1>Welcome to the user dashboard for reading app</h1>
+
+    <h2>Buy a book</h2>
+
+    <h2>${message}</h2>
+
+    <form action='/dashboard/buy' method="POST">
+        <div class="form-group col-md-3">
+            <label for="bookid" class="sr-only">Book id that you would like to buy</label>
+            <input name="bookid" type="text" class="form-control" id="bookid" aria-describedby="bookid" placeholder="Enter book ID you would like to buy">
+        </div>
+        <button type="submit" class="btn btn-primary">Buy book</button>
+    </form>
+</body>
+</html>

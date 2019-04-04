@@ -31,7 +31,7 @@ async function getUser(req, res) {
 async function createUser(req, res) {
 
     const newUserID = await User.createUser(req.body);
-    res.end(`New user ID: ${newUserID}`);
+    res.send(`New user ID: ${newUserID}`);
 
 }
 
@@ -39,18 +39,31 @@ async function ownedBooks(req, res) {
 
     const ownedBooks = await req.user.getOwnedBooks();
 
-    res.send(ownedBooks);
+    res.render('owned', {
+        locals: {
+            title: ownedBooks[0].title,
+            author: ownedBooks[0].author
+        }
+    });
 }
 
 async function buyBook(req, res) {
+    // need to change this so HTML form can buy book
 
-    const userID = req.params.userid;
-    const bookID = req.params.bookid;
+    const bookID = req.body.bookid;
+    console.log(`Book id is: ${bookID}`);
+
+    // need to figure out how to get userID
+    // this is in sessions somewhere
   
-    const aUser = await User.getById(userID);
+    const aUser = await User.getById(req.session.user);
     const newOwnedId = await aUser.buyBook(bookID);
   
-    res.send(`Your purchase ID: ${newOwnedId}`);
+    res.render('dashboard', {
+        locals: {
+            message: `Bought book, purchase ID is ${newOwnedId}`
+        }
+    });
 }
 
 async function sellBook(req, res) {

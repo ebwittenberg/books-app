@@ -13,7 +13,7 @@ async function checkLogin(req, res) {
     
     const theUser = await User.getByUsername(req.body.username);
 
-    console.log(`This is the user after username error: ${theUser}`);
+    // console.log(`This is the user after username error: ${theUser}`);
 
     // if username doesn't exist, getByUsername returns an error with a message "No data returned from the query"
     // need both username to exist and password to exist in order to login

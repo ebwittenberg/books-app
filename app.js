@@ -8,6 +8,7 @@ var usersRouter = require('./routes/users');
 const booksRouter = require('./routes/book');
 const ownedRouter = require('./routes/owned');
 const loginRouter = require('./routes/login');
+const dashboardRouter = require('./routes/dashboard');
 
 const es6Renderer = require('express-es6-template-engine');
 
@@ -50,16 +51,16 @@ app.use('/books', booksRouter);
 app.use('/owned', ownedRouter);
 app.use('/login', loginRouter);
 
-app.get('/dashboard', (req, res) => {
-  console.log(`The user's id is: ${req.session.user}`);
+app.use('/dashboard', dashboardRouter);
+//   console.log(`The user's id is: ${req.session.user}`);
 
-  // if user entered password correctly
-  if (req.session.user) {
-    res.send('This is the dashboard. You are now logged in');
-  } else {
-    // redirect to login page
-    res.redirect('/login');
-  }
-})
+//   // if user entered password correctly
+//   if (req.session.user) {
+//     res.render('dashboard');
+//   } else {
+//     // redirect to login page
+//     res.redirect('/login');
+//   }
+// })
 
 module.exports = app;

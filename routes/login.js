@@ -8,7 +8,6 @@ const {
 const loginRouter = express.Router();
 
 loginRouter.get('/',  showLogin);
-
 loginRouter.post('/', checkLogin);
 
 
