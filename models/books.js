@@ -22,6 +22,16 @@ class Book {
 
     }
 
+    static getByTitle(title) {
+        return db.one(`
+        select * from books
+        WHERE title ILIKE '${title}'
+        `)
+        .then(bookData => {
+            return new Book(bookData.id, bookData.title, bookData.author, bookData.genre);
+        })
+    }
+
     static getById(id) {
         return db.one(`
         select * from books

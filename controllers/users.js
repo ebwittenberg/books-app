@@ -1,9 +1,11 @@
 const User = require('../models/users');
+const Book = require('../models/books');
 
 async function getById(req, res, next) {
 
     const userID = req.session.user;
     const aUser = await User.getById(userID);
+    // stores instance of User in the request, which is being passed along to buyBook
     req.user = aUser;
 
     next();
@@ -48,34 +50,49 @@ async function ownedBooks(req, res) {
 }
 
 async function buyBook(req, res) {
-    // need to change this so HTML form can buy book
 
-    const bookID = req.body.bookid;
-    console.log(`Book id is: ${bookID}`);
+    // this is from the form
+    const bookTitle = req.body.booktitle;
+
+    console.log(`Book title is: ${bookTitle}`);
+
+    // convert entered title into book instance with all information
+
+    const bookInstance = await Book.getByTitle(bookTitle);
 
     // need to figure out how to get userID
     // this is in sessions somewhere
     // here it is
     // const aUser = await User.getById(req.session.user);
-    const newOwnedId = await req.user.buyBook(bookID);
+    console.log(`This is the book instance ${bookInstance}`);
+    // req.user was passed along from getById
+    const newOwnedId = await req.user.buyBook(bookInstance.id);
   
     res.render('dashboard', {
         locals: {
-            message: `Bought book, purchase ID is ${newOwnedId}`
+            message: `Bought book, purchase ID is ${newOwnedId}`,
+            username: req.session.username,
+            soldmessage: ''
         }
     });
 }
 
 async function sellBook(req, res) {
 
-    const userID = req.params.userid;
-    const bookID = req.params.bookid;
+    const bookTitle = req.body.booktitle;
   
-    const aUser = await User.getById(userID);
+    // const aUser = await User.getById(userID);
+    const bookInstance = await Book.getByTitle(bookTitle);
   
-    await aUser.removeBook(bookID);
+    await req.user.removeBook(bookInstance.id);
   
-    res.send('You no longer own this book.');
+    res.render('dashboard', {
+        locals: {
+            message: '',
+            username: req.session.username,
+            soldmessage: 'You have sold the book'
+        }
+    })
 
 }
 

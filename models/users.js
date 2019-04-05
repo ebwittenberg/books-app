@@ -55,6 +55,7 @@ class User {
 
     buyBook(bookID) {
         // needs to create new item in owned table
+        console.log(`From user model: this is the bookid being passed in: ${bookID}`);
         return db.one(`
         INSERT INTO owned (user_id, book_id)
         values ($1, $2)

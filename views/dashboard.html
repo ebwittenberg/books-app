@@ -8,18 +8,52 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-    <h1>Welcome to the user dashboard for reading app</h1>
+    <h1 class="d-inline">Welcome, ${username} to the user dashboard for reading app</h1>
 
-    <h2>Buy a book</h2>
+    <a href="/login" class="btn btn-primary btn-lg active float-right d-inline" role="button">Logout</a>
 
-    <h2>${message}</h2>
+    <div class="d-flex container mt-4">
 
-    <form action='/dashboard/buy' method="POST">
-        <div class="form-group col-md-3">
-            <label for="bookid" class="sr-only">Book id that you would like to buy</label>
-            <input name="bookid" type="text" class="form-control" id="bookid" aria-describedby="bookid" placeholder="Enter book ID you would like to buy">
+
+        <div class="container bg-dark col-md-6 border border-warning rounded text-center">
+    
+            <h2 class="text-primary">Buy a book</h2>
+        
+            <h2 class="bg-success">${message}</h2>
+        
+            <form action='/dashboard/buy' method="POST">
+                <div class="form-group">
+                    <label for="booktitle" class="sr-only">Book title that you would like to buy</label>
+                    <input name="booktitle" type="text" class="form-control" id="booktitle" aria-describedby="booktitle" placeholder="Enter book title you would like to buy">
+                </div>
+                <button type="submit" class="btn btn-primary">Buy book</button>
+            </form>
+            
+            
         </div>
-        <button type="submit" class="btn btn-primary">Buy book</button>
-    </form>
+        <div class="container bg-dark col-md-6 border border-warning rounded text-center">
+    
+            <h2 class="text-primary">Sell a book</h2>
+
+            <h2 class="bg-success">${soldmessage}</h2>
+    
+    
+    
+            <form action='/dashboard/sell' method="POST">
+                <div class="form-group">
+                    <label for="booktitle" class="sr-only">Book title that you would like to sell</label>
+                    <input name="booktitle" type="text" class="form-control" id="booktitle" aria-describedby="booktitle" placeholder="Enter book title you would like to sell">
+                </div>
+                <button type="submit" class="btn btn-primary">Sell book</button>
+            </form>
+    
+        </div>
+
+
+
+
+    </div>
+
+
 </body>
 </html>

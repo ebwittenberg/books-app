@@ -10,7 +10,7 @@ async function checkLogin(req, res) {
     // let's just assume they typed in the correct password
     // to do: check password for real
 
-    
+    // get instance of user by matching username to entered username (check if username is in system)
     const theUser = await User.getByUsername(req.body.username);
 
     // console.log(`This is the user after username error: ${theUser}`);
@@ -25,6 +25,7 @@ async function checkLogin(req, res) {
 
         // save the user's id to the session
         req.session.user = theUser.id
+        req.session.username = theUser.username;
         // Make sure the session is saved before we redirect
         req.session.save(() => {
             res.redirect('/dashboard');
